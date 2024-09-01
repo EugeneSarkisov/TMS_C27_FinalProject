@@ -6,6 +6,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -18,12 +19,21 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(request ->
-                        request.requestMatchers("/dating").hasRole("USER")
-                                .requestMatchers("/dating/profile").hasRole("USER")
-                                .requestMatchers("/dating/login").authenticated()
-                                .requestMatchers("/dating/sign_in").authenticated())
-                .formLogin(login -> login.defaultSuccessUrl("/dating/profile"))
+                .formLogin(login -> login
+                        .loginPage("/dating/login").permitAll()
+                        .loginProcessingUrl("/perform-login")
+                        .usernameParameter("username")
+                        .passwordParameter("password")
+                        .defaultSuccessUrl("/dating/profile"))
+                .authorizeHttpRequests(request -> request
+                        .requestMatchers("/dating").hasRole("USER")
+                        .requestMatchers("/dating/profile").hasRole("USER")
+                        .requestMatchers("/dating/registration", "/dating/registration-continue", "/css/**").permitAll().anyRequest().authenticated())
+                .sessionManagement(session -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+                        .invalidSessionUrl("/dating/login") //TODO invalid session page
+                        .maximumSessions(1)
+                        .maxSessionsPreventsLogin(false))
                 .logout(LogoutConfigurer::permitAll);
         return httpSecurity.build();
     }

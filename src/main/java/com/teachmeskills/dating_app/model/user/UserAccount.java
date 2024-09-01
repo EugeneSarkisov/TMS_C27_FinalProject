@@ -1,18 +1,23 @@
 package com.teachmeskills.dating_app.model.user;
 
+import com.teachmeskills.dating_app.util.enums.Role;
 import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name = "user_account")
+@ToString
+@EqualsAndHashCode
 public class UserAccount {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     @Getter
     @Setter
-    private int userAccountId;
+    private int id;
     @Column(name = "first_name")
     @Getter
     @Setter
@@ -28,7 +33,7 @@ public class UserAccount {
     @Column(name = "gender_id")
     @Getter
     @Setter
-    private String userAccountGenderId;
+    private int userAccountGenderId;
     @Column(name = "about_me")
     @Getter
     @Setter
@@ -41,8 +46,16 @@ public class UserAccount {
     @Getter
     @Setter
     private boolean isUserAccountConfirmed;
-    @Column(name = "user_role")
+    @Column(name = "username")
     @Getter
     @Setter
-    private String userAccountRole;
+    private String username;
+    @Column(name = "password")
+    @Getter
+    @Setter
+    private String password;
+    @Column(name = "role")
+    @Getter
+    @Setter
+    private String role;
 }
