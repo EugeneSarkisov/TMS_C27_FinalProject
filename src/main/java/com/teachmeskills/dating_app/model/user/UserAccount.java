@@ -1,6 +1,6 @@
+
 package com.teachmeskills.dating_app.model.user;
 
-import com.teachmeskills.dating_app.util.enums.Role;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

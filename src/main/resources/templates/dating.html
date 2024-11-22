@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User List</title>
+    <link rel="stylesheet" href="/css/dating.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+</head>
+<body>
+<div class="sidebar">
+    <header>My App</header>
+    <ul>
+        <li><a href="search"><i class="fas fa-qrcode"></i>Start Searching</a></li>
+        <li><a href="profile"><i class="fas fa-qrcode"></i>Your Profile</a></li>
+        <li><a href="settings"><i class="fas fa-qrcode"></i>Settings</a></li>
+    </ul>
+</div>
+<section>
+<div class="container">
+    <h1>Users</h1>
+    <table>
+        <ul class="user-list">
+            <li th:each="user : ${users}" th:onclick="'alert(\'User \'+ ${user.firstName} + \' clicked!\')'">
+                <div class="user-info">
+                    <div class="user-avatar" th:text="${user.userAccountFirstName.substring(0, 1).toUpperCase()}">U</div>
+                    <div class="user-details">
+                        <p><strong>First Name:</strong> <span th:text="${user.userAccountFirstName}"></span></p>
+                        <p><strong>Last Name:</strong> <span th:text="${user.userAccountLastName}"></span></p>
+                        <p><strong>Gender:</strong> <span th:text="${user.userAccountGenderId}"></span></p>
+                        <p><strong>About Me:</strong> <span th:text="${user.userAccountAboutMe}"></span></p>
+                    </div>
+                    <button id="id" class="like-button" th:action="@{/like}" th:object="${user}" th:value="*{user.getId}" th:onclick="'alert(\'You liked \' + ${user.firstName} + \'!\')'">Like</button>
+                </div>
+            </li>
+        </ul>
+    </table>
+</div>
+</section>
+</body>
+</html>

@@ -1,0 +1,70 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+}
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+h1 {
+    text-align: center;
+    color: #2196F3;
+}
+.user-list {
+    list-style-type: none;
+    padding: 0;
+}
+.user-list li {
+    background-color: #e3f2fd;
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.user-list li:hover {
+    background-color: #bbdefb;
+}
+.user-avatar {
+    background-color: #2196F3;
+    color: #fff;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 15px;
+    font-weight: bold;
+}
+.user-info {
+    display: flex;
+    align-items: center;
+}
+.user-details {
+    margin-left: 10px;
+    flex-grow: 1;
+}
+.user-details p {
+    margin: 5px 0;
+}
+.like-button {
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.like-button:hover {
+    background-color: #1976D2;
+}

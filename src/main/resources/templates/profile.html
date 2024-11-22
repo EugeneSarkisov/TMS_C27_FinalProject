@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Profile Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/css/profile.css">
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript"></script>
+</head>
+<body>
+<input type="checkbox" id="check">
+<label for="check">
+    <i class="fas fa-bars" id="btn"></i>
+    <i class="fas fa-times" id="cancel"></i>
+</label>
+<div class="sidebar">
+    <header>My App</header>
+    <ul>
+        <li><a href="search"><i class="fas fa-qrcode"></i>Start Searching</a></li>
+        <li><a href="profile"><i class="fas fa-qrcode"></i>Your Profile</a></li>
+        <li><a href="settings"><i class="fas fa-qrcode"></i>Settings</a></li>
+    </ul>
+</div>
+<section>
+    <div class="container">
+        <div class="page-inner no-page-title">
+            <div id="main-wrapper">
+                <div class="row">
+                    <div class="col-lg-12 col-xl-12">
+                        <div class="card card-white grid-margin">
+                            <div class="card-heading clearfix">
+                                <h4 class="card-title">User Profile</h4>
+                            </div>
+                            <div class="card-body user-profile-card mb-3">
+                                <img th:src="${userPhoto}"
+                                     class="user-profile-image rounded-circle" alt/>
+                                <h4 class="text-center h6 mt-2" th:text="${userFirstName}"></h4>
+                                <h4 class="text-center h6 mt-2" th:text="${userLastName}"></h4>
+                                <p class="text-center small">UI/UX Designer</p>
+                                <button class="btn btn-theme btn-sm">Message</button>
+                            </div>
+                            <hr/>
+                            <div class="card-heading clearfix mt-3">
+                                <h4 class="card-title">Interested In</h4>
+                            </div>
+                            <div class="card-body mb-3">
+                                <a href="#" class="label label-success mb-2" th:each="userHobbie : ${userHobbies}">
+                                    <li th:text="${userHobbie.toString}"></li>
+                                </a>
+                            </div>
+                            <hr/>
+                            <div class="card-heading clearfix mt-3">
+                                <h4 class="card-title">About Me</h4>
+                            </div>
+                            <div class="card-body mb-3">
+                                <p class="mb-0" th:text="${userAboutMe}"></p>
+                            </div>
+                            <hr/>
+                            <div class="card-heading clearfix mt-3">
+                                <h4 class="card-title">Contact Information</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-borderless mb-0 text-muted">
+                                        <tbody>
+                                        <tr>
+                                            <th scope="row">Email:</th>
+                                            <td th:text="${userEmail}"></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Phone:</th>
+                                            <td>Mock</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Address:</th>
+                                            <td>Mock</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

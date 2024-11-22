@@ -1,3 +1,4 @@
+
 package com.teachmeskills.dating_app.controller;
 
 import com.teachmeskills.dating_app.service.RegistrationService;
@@ -39,9 +40,9 @@ public class RegistrationController {
     }
 
     @PostMapping("/dating/registration_continue")
-    public String fillNewUser(String firstName, String lastName, String email, int genderId, HttpSession session) {
+    public String fillNewUser(String firstName, String lastName, String email, String gender, HttpSession session) {
         int accountId = (int) session.getAttribute("accountId");
-        registrationService.userAccountFiller(accountId, firstName, lastName, email, genderId);
+        registrationService.userAccountFiller(accountId, firstName, lastName, email, gender);
         session.removeAttribute("accountId");
         return "redirect:/dating/login";
     }

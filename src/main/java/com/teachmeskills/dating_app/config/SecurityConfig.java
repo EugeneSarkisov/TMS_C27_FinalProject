@@ -1,3 +1,4 @@
+
 package com.teachmeskills.dating_app.config;
 
 import org.springframework.context.annotation.Bean;
@@ -26,12 +27,11 @@ public class SecurityConfig {
                         .passwordParameter("password")
                         .defaultSuccessUrl("/dating/profile"))
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers("/dating").hasRole("USER")
-                        .requestMatchers("/dating/profile").hasRole("USER")
-                        .requestMatchers("/dating/registration", "/dating/registration-continue", "/css/**").permitAll().anyRequest().authenticated())
+                        .requestMatchers("/dating/profile/{accountId}").hasRole("USER")
+                        .requestMatchers("/dating/registration", "/dating/registration-continue", "/css/**", "/images/**").permitAll().anyRequest().authenticated())
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
-                        .invalidSessionUrl("/dating/login") //TODO invalid session page
+                        .invalidSessionUrl("/dating/login")
                         .maximumSessions(1)
                         .maxSessionsPreventsLogin(false))
                 .logout(LogoutConfigurer::permitAll);

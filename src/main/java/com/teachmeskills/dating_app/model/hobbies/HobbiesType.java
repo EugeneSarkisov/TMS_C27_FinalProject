@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
+@Table(name = "hobbies")
 public class HobbiesType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
