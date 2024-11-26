@@ -10,14 +10,22 @@
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript"></script>
+    <link rel="stylesheet" href="/css/sidebar.css">
 </head>
 <body>
+<input type="checkbox" id="check">
+<label for="check">
+    <i class="fas fa-bars" id="btn"></i>
+    <i class="fas fa-times" id="cancel"></i>
+</label>
 <div class="sidebar">
-    <header>My App</header>
+    <header>Dating</header>
     <ul>
         <li><a href="search"><i class="fas fa-qrcode"></i>Start Searching</a></li>
         <li><a href="profile"><i class="fas fa-qrcode"></i>Your Profile</a></li>
+        <li><a href="connections"><i class="fas fa-qrcode"></i>Likes</a></li>
         <li><a href="settings"><i class="fas fa-qrcode"></i>Settings</a></li>
+        <li><a href="logout"><i class="fas fa-qrcode"></i>LogOut</a></li>
     </ul>
 </div>
 <section>
@@ -36,7 +44,7 @@
                            aria-controls="home" aria-selected="false">Profile</a>
                     </li>
                 </ul>
-                <form th:action="@{/change_user_info}" method="post">
+                <form th:action="@{change_user_info}" method="post">
                     <hr class="my-4"/>
                     <div class="form-row">
                         <div class="form-group col-md-6">
@@ -74,7 +82,7 @@
                 <div>
                     <hr class="my-4"/>
                 </div>
-                <form th:action="@{/change_user_dating_param}" method="post">
+                <form th:action="@{change_user_dating_param}" method="post">
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="inputState6">Interested in</label>
@@ -98,7 +106,7 @@
                 <div>
                     <hr class="my-4"/>
                 </div>
-                <form th:action="@{/change_password}" method="post">
+                <form th:action="@{change_password}" method="post">
                     <div class="row mb-4">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -116,7 +124,7 @@
                 <div>
                     <hr class="my-4">
                 </div>
-                <form th:action="@{/add_user_hobby}" method="post">
+                <form th:action="@{add_user_hobby}" method="post">
                     <div class="row mb-4">
                         <div class="col-md-6">
                             <div class="card-body mb-3">
@@ -141,7 +149,7 @@
                 <hr class="my-4">
             </div>
             <div>
-                <form th:action="@{/remove_user_hobby}" method="post">
+                <form th:action="@{remove_user_hobby}" method="post">
                     <label for="hobbieDelete">Remove Hobby</label>
                     <select id="hobbieDelete" name="hobbieDelete" class="form-control">
                         <option th:each="userHobbie : ${userHobbies}"
@@ -156,7 +164,7 @@
                 <hr class="my-4">
             </div>
             <div>
-                <form method="post" th:action="@{/change_user_photo}" enctype="multipart/form-data">
+                <form method="post" th:action="@{change_user_photo}" enctype="multipart/form-data">
                     <label>Update Photo</label>
                     <div class="form-group">
                         <input type="file" name="photo" accept="image/*" class="form-control-file">

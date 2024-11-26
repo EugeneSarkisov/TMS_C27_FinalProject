@@ -8,12 +8,19 @@
     <link rel="stylesheet" href="/css/sidebar.css">
 </head>
 <body>
+<input type="checkbox" id="check">
+<label for="check">
+    <i class="fas fa-bars" id="btn"></i>
+    <i class="fas fa-times" id="cancel"></i>
+</label>
 <div class="sidebar">
-    <header>My App</header>
+    <header>Dating</header>
     <ul>
         <li><a href="search"><i class="fas fa-qrcode"></i>Start Searching</a></li>
         <li><a href="profile"><i class="fas fa-qrcode"></i>Your Profile</a></li>
+        <li><a href="connections"><i class="fas fa-qrcode"></i>Likes</a></li>
         <li><a href="settings"><i class="fas fa-qrcode"></i>Settings</a></li>
+        <li><a href="logout"><i class="fas fa-qrcode"></i>LogOut</a></li>
     </ul>
 </div>
 <section>
@@ -30,7 +37,10 @@
                         <p><strong>Gender:</strong> <span th:text="${user.userAccountGenderId}"></span></p>
                         <p><strong>About Me:</strong> <span th:text="${user.userAccountAboutMe}"></span></p>
                     </div>
-                    <button id="id" class="like-button" th:action="@{/like}" th:object="${user}" th:value="*{user.getId}" th:onclick="'alert(\'You liked \' + ${user.firstName} + \'!\')'">Like</button>
+                    <form th:action="@{like}" method="post">
+                       <input type="hidden" th:name="userId", th:value="${user.id}">
+                    <button type="submit" th:action="@{like}" class="like-button">Like</button>
+                    </form>
                 </div>
             </li>
         </ul>

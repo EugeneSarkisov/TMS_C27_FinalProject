@@ -7,22 +7,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
+@RequestMapping("/dating")
 public class RegistrationController {
+
     @Autowired
     private RegistrationService registrationService;
-
-
-    @GetMapping("/dating/registration")
+    @GetMapping("/registration")
     public String showRegPage() {
         return "registration";
     }
-
-    //TODO send an email
-
-    @PostMapping("/dating/registration")
+    @PostMapping("/registration")
     public String regNewUser(String username, String password, HttpSession session) {
         boolean ifUsernameExist = registrationService.ifUsernameAlreadyExist(username);
         if (ifUsernameExist) {
@@ -34,12 +32,12 @@ public class RegistrationController {
         }
     }
 
-    @GetMapping("/dating/registration_continue")
+    @GetMapping("/registration_continue")
     public String showSecRegPage() {
         return "registration_continue";
     }
 
-    @PostMapping("/dating/registration_continue")
+    @PostMapping("/registration_continue")
     public String fillNewUser(String firstName, String lastName, String email, String gender, HttpSession session) {
         int accountId = (int) session.getAttribute("accountId");
         registrationService.userAccountFiller(accountId, firstName, lastName, email, gender);

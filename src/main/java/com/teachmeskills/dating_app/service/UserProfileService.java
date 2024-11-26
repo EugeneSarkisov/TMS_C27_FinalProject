@@ -57,7 +57,7 @@ public class UserProfileService {
         try{
             userParam.put("userPhoto", userPhotoRepository.getUserPhotoByUserAccountId(userAccount.getId()).getPhotoLink());
         } catch (NullPointerException exception){
-            userParam.put("userPhoto", "null");
+            userParam.put("userPhoto", Const.NO_IMAGE_FILE_DIRECTION);
         }
         return userParam;
     }

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Connections</title>
+    <link rel="stylesheet" href="/css/connections.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+</head>
+<body>
+<input type="checkbox" id="check">
+<label for="check">
+    <i class="fas fa-bars" id="btn"></i>
+    <i class="fas fa-times" id="cancel"></i>
+</label>
+<div class="sidebar">
+    <header>Dating</header>
+    <ul>
+        <li><a href="search"><i class="fas fa-qrcode"></i>Start Searching</a></li>
+        <li><a href="profile"><i class="fas fa-qrcode"></i>Your Profile</a></li>
+        <li><a href="connections"><i class="fas fa-qrcode"></i>Likes</a></li>
+        <li><a href="settings"><i class="fas fa-qrcode"></i>Settings</a></li>
+        <li><a href="logout"><i class="fas fa-qrcode"></i>LogOut</a></li>
+    </ul>
+</div>
+<div class="container">
+    <h1>User Connections</h1>
+    <div>
+        <table>
+            <h2 class="section-title">You Like</h2>
+            <tbody th:if="${youLike != null}">
+            <ul class="user-list">
+                <li th:each="user : ${youLike}">
+                    <div class="user-full-name" th:text="${user.userAccountFirstName} + ' ' + ${user.userAccountLastName}">Full Name</div>
+                </li>
+            </ul>
+            </tbody>
+        </table>
+    </div>
+
+    <div>
+        <table>
+            <h2 class="section-title">You Were Liked By</h2>
+            <tbody th:if="${youWereLikedBy != null}">
+            <ul class="user-list">
+                <li th:each="user : ${youWereLikedBy}">
+                    <div class="user-full-name" th:text="${user.userAccountFirstName} + ' ' + ${user.userAccountLastName}">Full Name</div>
+                </li>
+            </ul>
+            </tbody>
+        </table>
+    </div>
+
+    <div>
+        <table>
+            <h2 class="section-title">Matches</h2>
+            <tbody th:if="${youWereLikedBy != null}">
+            <ul class="user-list">
+                <li th:each="user : ${matches}">
+                    <div class="user-full-name" th:text="${user.userAccountFirstName} + ' ' + ${user.userAccountLastName}">Full Name</div>
+                    <a th:href="@{profile(user_id=${user.id})}" class="profile-button">Go to Profile</a>
+                </li>
+            </ul>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
