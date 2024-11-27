@@ -36,12 +36,4 @@ public class RegistrationService {
         userAccount.setUserAccountGenderId(genderRepository.getGenderIdByName(gender));
         userAccountRepository.save(userAccount);
     }
-
-    public boolean ifUsernameAlreadyExist(String username){
-        if(userAccountRepository.findUserAccountByUsername(username) != null){
-            return true;
-        } else {
-            return false;
-        }
-    }
 }

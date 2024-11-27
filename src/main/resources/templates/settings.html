@@ -51,17 +51,28 @@
                             <label for="firstname">Firstname</label>
                             <input type="text" id="firstname" class="form-control" name="first_name"
                                    th:placeholder="${userFirstName}" th:value="${userFirstName}"/>
+                            <div th:if="${param.error}" class="alert alert-error">
+                                "First name must contain only digit and lowercase letters."
+                            </div>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="lastname">Lastname</label>
                             <input type="text" id="lastname" class="form-control" name="last_name"
                                    th:placeholder="${userLastName}" th:value="${userLastName}"/>
+                            <div th:if="${param.error}" class="alert alert-error">
+                                "Last name must contain only digit
+                                and lowercase letters."
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input type="email" class="form-control" id="email" name="email" th:placeholder="${userEmail}"
                                th:value="${userEmail}"/>
+                        <div th:if="${param.error}" class="alert alert-error">
+                            "Email must match the pattern:
+                            example@example.etc"
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="aboutMe">About me</label>
@@ -116,6 +127,9 @@
                             <div class="form-group">
                                 <label for="new_password">New Password</label>
                                 <input type="password" class="form-control" name="new_password" id="new_password"/>
+                                <div th:if="${param.errorPassword}" class="alert alert-error">
+                                    "Password must contain: At least one digit, At least one lowercase character, At least one uppercase character"
+                                </div>
                             </div>
                         </div>
                     </div>

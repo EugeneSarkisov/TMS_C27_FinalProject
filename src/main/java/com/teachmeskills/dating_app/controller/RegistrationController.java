@@ -2,6 +2,7 @@
 package com.teachmeskills.dating_app.controller;
 
 import com.teachmeskills.dating_app.service.RegistrationService;
+import com.teachmeskills.dating_app.util.validation.Validation;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,9 +23,12 @@ public class RegistrationController {
     }
     @PostMapping("/registration")
     public String regNewUser(String username, String password, HttpSession session) {
-        boolean ifUsernameExist = registrationService.ifUsernameAlreadyExist(username);
+        boolean ifUsernameExist = Validation.ifUsernameAlreadyExist(username);
+        boolean ifPasswordCorrect = Validation.ifPasswordCorrect(password);
         if (ifUsernameExist) {
             return "redirect:/dating/registration?error";
+        } else if(!ifPasswordCorrect){
+            return "redirect:/dating/registration?errorPassword";
         } else {
             int accountId = registrationService.userAccountRegistration(username, password);
             session.setAttribute("accountId", accountId);
@@ -39,9 +43,14 @@ public class RegistrationController {
 
     @PostMapping("/registration_continue")
     public String fillNewUser(String firstName, String lastName, String email, String gender, HttpSession session) {
-        int accountId = (int) session.getAttribute("accountId");
-        registrationService.userAccountFiller(accountId, firstName, lastName, email, gender);
-        session.removeAttribute("accountId");
-        return "redirect:/dating/login";
+        boolean ifParamsCorrect = Validation.ifParamsCorrect(firstName, lastName, email);
+        if(ifParamsCorrect){
+            int accountId = (int) session.getAttribute("accountId");
+            registrationService.userAccountFiller(accountId, firstName, lastName, email, gender);
+            session.removeAttribute("accountId");
+            return "redirect:/dating/login";
+        } else{
+           return  "redirect:/dating/registration_continue?error";
+        }
     }
 }

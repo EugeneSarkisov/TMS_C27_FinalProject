@@ -3,6 +3,7 @@ package com.teachmeskills.dating_app.controller;
 import com.teachmeskills.dating_app.model.user.UserAccount;
 import com.teachmeskills.dating_app.repository.*;
 import com.teachmeskills.dating_app.service.UserProfileService;
+import com.teachmeskills.dating_app.util.validation.Validation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -56,17 +57,28 @@ public class UserProfileController {
     public String updateUserInfo(@RequestParam("first_name") String firstName, @RequestParam("last_name") String lastName,
                                  @RequestParam("email") String email, @RequestParam("aboutMe") String aboutMe,
                                  @RequestParam("gender") String gender) {
-        UserAccount userAccount = userAccountRepository.findUserAccountByUsername(userProfileService.getAuthUser());
-        userAccount = userProfileService.userAccountUpdate(userProfileService.setNewUserAccountParams(userAccount, firstName, lastName, email, aboutMe, genderRepository.getGenderIdByName(gender)));
-        userAccountRepository.save(userAccount);
-        return "redirect:/dating/settings";
+        boolean ifParamsCorrect = Validation.ifParamsCorrect(firstName, lastName, email);
+        if(ifParamsCorrect){
+            UserAccount userAccount = userAccountRepository.findUserAccountByUsername(userProfileService.getAuthUser());
+            userAccount = userProfileService.userAccountUpdate(userProfileService.setNewUserAccountParams(userAccount, firstName, lastName, email, aboutMe, genderRepository.getGenderIdByName(gender)));
+            userAccountRepository.save(userAccount);
+            return "redirect:/dating/settings";
+        } else {
+            return "redirect:/dating/settings?error";
+        }
     }
 
     @PostMapping("/change_password")
     public String updateUserPassword(@RequestParam("old_password") String oldPassword, @RequestParam("new_password") String newPassword) throws Exception {
-        UserAccount userAccount = userAccountRepository.findUserAccountByUsername(userProfileService.getAuthUser());
-        userProfileService.changeUserPassword(userAccount, oldPassword, newPassword);
-        return "redirect:/dating/settings";
+        boolean ifPasswordCorrect = Validation.ifPasswordCorrect(newPassword);
+        if(ifPasswordCorrect){
+            UserAccount userAccount = userAccountRepository.findUserAccountByUsername(userProfileService.getAuthUser());
+            userProfileService.changeUserPassword(userAccount, oldPassword, newPassword);
+            return "redirect:/dating/settings";
+        } else {
+            return "redirect:/dating/settings?errorPassword";
+        }
+
     }
 
     @PostMapping("/add_user_hobby")
