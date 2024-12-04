@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Registration or Sign Up form in HTML CSS | CodingLab </title>
+    <link href="/css/registration.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div class="wrapper">
+    <h2>Registration</h2>
+    <form action="registration" method="post" enctype="application/x-www-form-urlencoded">
+        <div class="input-box">
+            <input name="username" type="text" placeholder="Enter your username" required>
+            <div th:if="${param.error}" class="alert alert-error">
+                "Username already exist!"
+            </div>
+        </div>
+        <div class="input-box">
+            <input name="password" type="password" placeholder="Create password" required>
+            <div th:if="${param.errorPassword}" class="alert alert-error">
+                "Password must contain: At least one digit, At least one lowercase character, At least one uppercase character"
+            </div>
+        </div>
+        <div class="input-box button">
+            <input type="Submit" value="Register Now">
+        </div>
+    </form>
+</div>
+</body>
+</html>
